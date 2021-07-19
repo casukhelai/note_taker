@@ -17,9 +17,7 @@ app.use(express.json());
 //   API Route
 // ***************
 
-// Set up API routes
-// Following will be setting up /api/notes
-// need to allow the user to set up the API somehow
+// Set up JSON API file
 const readFile = (note) => {
     fs.readFile(
         path.join(__dirname, "db/db.json"),
@@ -32,11 +30,38 @@ const readFile = (note) => {
 
 // create something such that the user sets up the notes variable
 
-// GET requests
+// ****************************************************************************
+//   GET requests -- make the appropriate 'connections' to all relevant files
+// ****************************************************************************
 
+// request for the main page
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
+// request to the notes html file
+app.get('/notes', (req,res) => {
+    res.sendFile(path.join(__dirname, 'notes.html'));
+});
 
-// POST requests
+// request the index.js file to listen to user
+app.get('/assets/js/index', (req,res) => {
+    res.sendFile(path.join(__dirname, '/assets/js/index'));
+});
+
+// notes json api route
+app.get('/api/notes', (req,res) => {
+    res.sendFile(path.join(__dirname, '/db/db.json'))
+});
+
+// default link when an invalid request is made
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, 'index.html'))
+});
+
+// ****************************************************************************
+//   POST requests -- create appropriate 'destinations' for the GET requests
+// ****************************************************************************
 
 
  
