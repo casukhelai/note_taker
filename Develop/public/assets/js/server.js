@@ -1,9 +1,10 @@
 // set up the server
 // USE "node server.js" IN PATH /js TO RUN SERVER
+const { notStrictEqual } = require('assert');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const noteList = JSON.parse(data);
+const list= JSON.parse(fs.readFileSync('../db/db.json', "utf-8"));
 
 // set up Express app
 const PORT = process.env.PORT || 3001;
@@ -18,8 +19,8 @@ app.use(express.json());
 // ***************
 
 // Set up JSON API file
-const readFile = (note) => {
-    fs.readFile(
+const createNotes = (note) => {
+    fs.writeFile(
         path.join(__dirname, "db/db.json"),
         // parse json into stringify just in case
         JSON.stringify(note),
@@ -63,8 +64,13 @@ app.get('*', (req,res) => {
 //   POST requests -- create appropriate 'destinations' for the GET requests
 // ****************************************************************************
 
-
- 
+// POST Request after note is "saved"
+app.post('/api/notes', (req,res) => {
+    let newNote = req.body;
+    notes.push(newNote);
+    createNotes();
+    console.log("test");
+})
 // add app.listen
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
 
