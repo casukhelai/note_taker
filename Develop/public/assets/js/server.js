@@ -1,10 +1,10 @@
 // set up the server
 // USE "node server.js" IN PATH /js TO RUN SERVER
-const { notStrictEqual } = require('assert');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const list= JSON.parse(fs.readFileSync('../db/db.json', "utf-8"));
+const list= fs.readFileSync("db/db.json", "utf-8");
+const noteList = JSON.parse(list);
 
 // set up Express app
 const PORT = process.env.PORT || 3001;
@@ -19,7 +19,7 @@ app.use(express.json());
 // ***************
 
 // Set up JSON API file
-const createNotes = (note) => {
+function createNotes(note) {
     fs.writeFile(
         path.join(__dirname, "db/db.json"),
         // parse json into stringify just in case
@@ -52,7 +52,7 @@ app.get('/assets/js/index', (req,res) => {
 
 // notes json api route
 app.get('/api/notes', (req,res) => {
-    res.sendFile(path.join(__dirname, '/db/db.json'))
+    res.sendFile(path.join(__dirname, "/db/db.json"))
 });
 
 // default link when an invalid request is made
@@ -65,12 +65,13 @@ app.get('*', (req,res) => {
 // ****************************************************************************
 
 // POST Request after note is "saved"
-app.post('/api/notes', (req,res) => {
-    let newNote = req.body;
-    notes.push(newNote);
-    createNotes();
-    console.log("test");
-})
+// app.post('/api/notes', (req,res) => {
+//     let newNote = req.body;
+//     notes.push(newNote);
+//     createNotes();
+//     console.log("test");
+// });
+
 // add app.listen
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
 
