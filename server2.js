@@ -4,8 +4,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const html_route = require('./routes/html_route');
-// const uniqid = require('uniqid');
-
+const api_route = require('./routes/api_route');
 
 // set up Express app
 const PORT = process.env.PORT || 3001;
@@ -16,9 +15,9 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(express.static('public'));
 
-// 
-
+// call routes
 app.use('/', html_route);
+app.use('/', api_route);
 
 // add app.listen
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
