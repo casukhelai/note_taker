@@ -33,7 +33,31 @@ router.post('/api/notes', (req,res) => {
     res.json(data);
 });
 
+router.delete('/api/notes/:id', (req,res) => {
+    // access data note from client
+    let id = req.params.id;
+    
+    console.log("this is gonna delete ur note");
 
+    // grab data from the db.json & push the newNote into the database
+    let data = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+
+    // can use filter or for loop
+    for(let i=0; i<data.length;i++){
+        if(id == data[i].id){
+            data.splice(i,1);
+
+        // write to db.json
+            fs.writeFileSync('./db/db.json', JSON.stringify(data));
+            console.log('\nSuccesfully deleted the note!');
+
+            res.json(data);
+            return;
+        }
+    }
+
+    
+});
 
 
 module.exports = router;
