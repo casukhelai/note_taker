@@ -1,7 +1,6 @@
 // set up the server
 // USE "node server.js" IN PATH /js TO RUN SERVER
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
 const html_route = require('./routes/html_route');
 const api_route = require('./routes/api_route');

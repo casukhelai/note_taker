@@ -1,4 +1,4 @@
-const fs = require('fs');
+// const fs = require('fs');
 const router = require('express').Router();
 const path = require('path');
 
@@ -8,13 +8,13 @@ const path = require('path');
 // ****************************************************************************
 
     // default link when an invalid request is made
-    router.get('*', (req,res) => {
-        res.sendFile(path.join(__dirname, '../Develop/public/index.html'))
+    router.get('/', (req,res) => {
+        res.sendFile(path.join(__dirname, '../public/index.html'))
     });
 
     // request to the notes html file
     router.get('/notes', (req,res) => {
-        res.sendFile(path.join(__dirname, '../Develop/public/notes.html'));
+        res.sendFile(path.join(__dirname, '../public/notes.html'));
     });
 
     module.exports = router;
