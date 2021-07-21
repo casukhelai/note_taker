@@ -36,7 +36,7 @@ node server.js
 ###### TO OPEN IN HEROKU
 1. Go to [https://rocky-brushlands-37065.herokuapp.com/](https://rocky-brushlands-37065.herokuapp.com/).
     
-    ![alt text](assets/note_taker_demo.gif)
+![note_taker_demo](assets/note_taker_demo.gif)
   
 ## Credits
 Here are the following links I found useful in doing this project!
